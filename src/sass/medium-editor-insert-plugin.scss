@@ -45,6 +45,14 @@ q, blockquote {
   }
 }
 
+/**
+* Fix for google maps http://stackoverflow.com/a/16448276/291500
+*/
+
+.gmnoprint img { 
+  max-width: none;
+}
+
 .mediumInsert {
   position: relative;
   margin: -1em 0 -1em -80px;
@@ -120,8 +128,31 @@ q, blockquote {
       }
     }
     .mediumInsert-maps {
-      padding: 10px;
-      background: #ccc;
+      margin: 2em 0;
+      .mediumInsert-maps-search {
+        @extend .clearfix;
+        padding: 5px;
+        background: #efefef;
+        border: 1px solid #ccc;
+        input {
+          float: left;
+          width: calc(89% - 10px);
+          padding: 5px;
+          border: 1px solid #ccc;
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 10pt;
+        }
+        button {
+          float: right;
+          width: calc(10% - 10px);
+          padding: 5px;
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 10pt;
+        }
+      }
+      .mediumInsert-map {
+        height: 300px; 
+      }
     }
   }
   &.hover {
