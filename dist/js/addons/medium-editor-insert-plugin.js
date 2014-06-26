@@ -43,13 +43,17 @@
             if ($insertData.length === 0) {
               $insert.remove();
             } else {
-              $insert.removeAttr('contenteditable');
+              $insert.removeAttr('contenteditable').find('*').removeAttr('contenteditable');
               $('img[draggable]', $insert).removeAttr('draggable');
               if ($insert.hasClass('small')) {
                 $insertData.addClass('small');
               }
               $('.mediumInsert-buttons', $insert).remove();
+              $insert.find('.caption').unwrap();
               $insertData.unwrap();
+              if ($insert.find('.caption').children().text() !== '') {
+                $insert.find('.caption').html($insert.find('.caption').children().text());
+              }
             }
           }
 
@@ -332,11 +336,6 @@
     setEvents: function () {
       var that = this,
           $el = $.fn.mediumInsert.insert.$el;
-
-      $el.on('selectstart', '.mediumInsert', function (e) {
-        e.preventDefault();
-        return false;
-      });
 
       $el.on('blur', function () {
         var $clone = $(this).clone(),

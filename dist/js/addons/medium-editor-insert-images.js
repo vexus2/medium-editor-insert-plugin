@@ -105,6 +105,7 @@
       this.options = $.extend(this.default, options);
 
       this.setImageEvents();
+      this.setCaptionEvents();
 
       if (this.options.useDragAndDrop === true){
         this.setDragAndDropEvents();
@@ -201,6 +202,8 @@
       if (jqxhr.responseText) {
         $progress.before('<figure class="mediumInsert-images"><img src="'+ jqxhr.responseText +'" draggable="true" alt=""></figure>');
         $img = $progress.siblings('img');
+
+        $progress.after('<div class="mediumInsert-imagesCaption"><span class="caption" contenteditable="true">Type caption here</span></div>');
 
         $img.load(function () {
           $img.parent().mouseleave().mouseenter();
@@ -338,11 +341,39 @@
         if ($(this).parent().siblings().length === 0) {
           $(this).parent().parent().parent().removeClass('small');
         }
-        $(this).parent().remove();
+        $(this).parent().parent().empty();
 
         that.deleteFile(img, that);
 
         $.fn.mediumInsert.insert.deselect();
+      });
+    },
+
+    setCaptionEvents: function () {
+      this.$el.on('mouseenter', '.mediumInsert-imagesCaption', function () {
+        if ($.fn.mediumInsert.settings.enabled === false) {
+          return;
+        }
+
+        $(this).find('.caption').append('<ul class="caption-edit" contenteditable="false"><li class="white mediumInsert-changeCaptionSchema" data-color-schema="white"></li><li class="black mediumInsert-changeCaptionSchema" data-color-schema="black"></li><li class="delete mediumInsert-deleteCaption"></li></ul>');
+      });
+
+      this.$el.on('mouseleave', '.mediumInsert-imagesCaption', function () {
+        $('.caption-edit', this).remove();
+      });
+
+      this.$el.on('click', '.mediumInsert-changeCaptionSchema', function () {
+        var color_schema = $(this).data('color-schema');
+        $(this).parent().parent().attr('class', 'caption ' + color_schema);
+      });
+
+      this.$el.on('click', '.mediumInsert-deleteCaption', function () {
+        $(this).parent().parent().remove();
+      });
+      this.$el.on('keypress', '.mediumInsert-imagesCaption > .caption', function(e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+        }
       });
     },
 
