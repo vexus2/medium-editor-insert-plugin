@@ -16,10 +16,10 @@ q, blockquote {
 
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+//  -moz-user-select: none;
+//  -khtml-user-select: none;
+//  -webkit-user-select: none;
+//  user-select: none;
   /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
@@ -247,6 +247,64 @@ q, blockquote {
       margin-right: 30px;
     }
   }
+
+  .caption {
+    margin-bottom: 30px;
+    padding-bottom: 0px;
+    display: block;
+    margin-top: 4px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.4;
+    border: solid 1px #ccc;
+    border-top: none;
+    color: #404040;
+    background-color: #fff;
+    &.black {
+      border: none;
+      background-color: #404040;
+      color: #fff;
+    }
+  }
+
+  .caption-edit {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    cursor: pointer;
+    li {
+      list-style-type: none;
+      float: left;
+      margin-right: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      &.white {
+        border: solid 2px #ccc;
+        background-color: #f7f7f7;
+      }
+      &.black {
+        border: solid 2px #404040;
+        background-color: #404040;
+      }
+      &.delete {
+        border-radius: 0%;
+        border: solid 2px #303030;
+        background-color: #303030;
+        background-image: url(../images/remove.png);
+        background-repeat: no-repeat;
+      }
+      a {
+        display: block;
+        width: 28px;
+        height: 28px;
+        color: transparent;
+        font: 0/0 a; /* for Image Replacement */
+        text-shadow: none;
+      }
+    }
+  }
+
 }
 
 .hover {
