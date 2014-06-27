@@ -49,7 +49,9 @@
                 $insertData.addClass('small');
               }
               $('.mediumInsert-buttons', $insert).remove();
+              $('.mediumInsert-captionEdit').remove();
               $insert.find('.caption').unwrap();
+              $insert.find('.caption').children().remove();
               $insertData.unwrap();
               if ($insert.find('.caption').children().text() !== '') {
                 $insert.find('.caption').html($insert.find('.caption').children().text());

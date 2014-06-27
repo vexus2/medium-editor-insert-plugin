@@ -267,7 +267,7 @@ q, blockquote {
     }
   }
 
-  .caption-edit {
+  .mediumInsert-captionEdit {
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -293,14 +293,6 @@ q, blockquote {
         background-color: #303030;
         background-image: url(../images/remove.png);
         background-repeat: no-repeat;
-      }
-      a {
-        display: block;
-        width: 28px;
-        height: 28px;
-        color: transparent;
-        font: 0/0 a; /* for Image Replacement */
-        text-shadow: none;
       }
     }
   }
