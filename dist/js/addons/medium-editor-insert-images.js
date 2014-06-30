@@ -203,7 +203,7 @@
         $progress.before('<figure class="mediumInsert-images"><img src="'+ jqxhr.responseText +'" draggable="true" alt=""></figure>');
         $img = $progress.siblings('img');
 
-        $progress.after('<span class="caption mediumInsert-imagesCaption" contenteditable="true">Type caption here</span>');
+        $progress.after('<span class="mediumInsert-imagesCaption" contenteditable="true"><span class="caption">Type caption here</span></span>');
 
         $img.load(function () {
           $img.parent().mouseleave().mouseenter();
@@ -363,15 +363,20 @@
 
       this.$el.on('click', '.mediumInsert-changeCaptionSchema', function () {
         var color_schema = $(this).data('color-schema');
-        $(this).parent().parent().attr('class', 'caption ' + color_schema);
+        $($(this).parent().parent().children()[0]).attr('class', 'caption ' + color_schema);
       });
 
       this.$el.on('click', '.mediumInsert-deleteCaption', function () {
         $(this).parent().parent().remove();
       });
-      this.$el.on('keypress', '.mediumInsert-imagesCaption', function(e) {
-        if (e.keyCode === 13) {
-          e.preventDefault();
+
+      this.$el.on('DOMNodeInserted', '.mediumInsert-imagesCaption', function() {
+        if (!/(<p|<br).*?/.test($(this).html())) {
+          return;
+        }
+        $(this).html('<span class="caption">' + $(this).text() + '</span>');
+        if ($(this).parent()[0] !== undefined && $(this).parent()[0].tagName.toLowerCase() == 'p') {
+          $(this).unwrap();
         }
       });
     },
