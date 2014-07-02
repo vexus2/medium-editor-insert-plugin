@@ -49,6 +49,7 @@
                 $insertData.addClass('small');
               }
               $('.mediumInsert-buttons', $insert).remove();
+//              $('.mediumInsert-placeholder', $insert).remove();
               $insertData.unwrap();
               if ($insert.find('.caption').children().text() !== '') {
                 $insert.find('.caption').html($insert.find('.caption').children().text());
